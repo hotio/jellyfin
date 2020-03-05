@@ -1,7 +1,7 @@
 #!/usr/bin/with-contenv bash
 # shellcheck shell=bash
 
-DEVICES=$(find /dev/dri /dev/dvb -type c -print 2>/dev/null)
+DEVICES=$(find /dev/dri /dev/dvb /dev/vchiq -type c -print 2>/dev/null)
 
 for i in ${DEVICES}; do
     # Get the group ID and NAME (if exists) for the current device in the list
@@ -17,3 +17,8 @@ for i in ${DEVICES}; do
     # If the user hotio isn't a member of the group, add him
     getent group "${DEVICE_GROUP_NAME}" | grep -q hotio || usermod -a -G "${DEVICE_GROUP_NAME}" hotio
 done
+
+if [[ -d "/opt/vc/lib" ]] && [[ ! -f "/etc/ld.so.conf.d/00-vmcs.conf" ]]; then
+    echo "/opt/vc/lib" > "/etc/ld.so.conf.d/00-vmcs.conf"
+	ldconfig
+fi
