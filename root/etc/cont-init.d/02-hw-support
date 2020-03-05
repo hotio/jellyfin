@@ -1,7 +1,7 @@
 #!/usr/bin/with-contenv bash
 # shellcheck shell=bash
 
-DEVICES=$(find /dev/dri /dev/dvb /dev/vchiq -type c -print 2>/dev/null)
+DEVICES=$(find /dev/dri /dev/dvb /dev/vchiq /dev/video1? -type c -print 2>/dev/null)
 
 for i in ${DEVICES}; do
     # Get the group ID and NAME (if exists) for the current device in the list
