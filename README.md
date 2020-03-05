@@ -12,7 +12,7 @@
 Just the basics to get the container running:
 
 ```shell
-docker run --rm --name jellyfin -p 8096:8096 -v /<host_folder_config>:/config -v /<host_folder_transcode>:/transcode hotio/jellyfin
+docker run --rm --name jellyfin -p 8096:8096 -v /<host_folder_config>:/config hotio/jellyfin
 ```
 
 The environment variables below are all optional, the values you see are the defaults.
