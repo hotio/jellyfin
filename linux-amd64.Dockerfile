@@ -4,8 +4,6 @@ ARG DEBIAN_FRONTEND="noninteractive"
 
 EXPOSE 8096
 
-VOLUME ["/transcode"]
-
 # install packages
 RUN apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
