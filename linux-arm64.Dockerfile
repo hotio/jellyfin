@@ -24,6 +24,6 @@ RUN debfile="/tmp/ffmpeg.deb" && curl -fsSL -o "${debfile}" "https://github.com/
 ARG JELLYFIN_VERSION=10.5.0
 
 # install app
-RUN debfile="/tmp/jellyfin.deb" && curl -fsSL -o "${debfile}" "https://github.com/jellyfin/jellyfin/releases/download/v${JELLYFIN_VERSION}/jellyfin_${JELLYFIN_VERSION}-1_ubuntu-arm64.deb" && dpkg --install "${debfile}" && rm "${debfile}"
+RUN debfile="/tmp/jellyfin.deb" && curl -fsSL -o "${debfile}" "https://repo.jellyfin.org/releases/server/ubuntu/stable/jellyfin_${JELLYFIN_VERSION}_arm64.deb" && dpkg --install "${debfile}" && rm "${debfile}"
 
 COPY root/ /
