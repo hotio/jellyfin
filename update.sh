@@ -50,7 +50,7 @@ elif [[ ${1} == "checkdigests" ]]; then
     digest=$(echo "${manifest}" | jq -r '.manifests[] | select (.platform.architecture == "arm" and .platform.os == "linux").digest')   && sed -i "s#FROM .*\$#FROM ${image}@${digest}#g" ./linux-arm.Dockerfile   && echo "${digest}"
     digest=$(echo "${manifest}" | jq -r '.manifests[] | select (.platform.architecture == "arm64" and .platform.os == "linux").digest') && sed -i "s#FROM .*\$#FROM ${image}@${digest}#g" ./linux-arm64.Dockerfile && echo "${digest}"
 else
-    version=$(curl -fsSL "https://api.github.com/repos/jellyfin/jellyfin/releases/latest" | jq -r .tag_name | sed s/v//g)
+    version=$(curl -fsSL "https://repo.jellyfin.org/releases/server/ubuntu/stable/" | grep -o ">jellyfin_.*.dsc<" | sed -e 's/>jellyfin_//g' -e 's/.dsc<//g')
     [[ -z ${version} ]] && exit 1
     version_ffmpeg=$(curl -fsSL "https://api.github.com/repos/jellyfin/jellyfin-ffmpeg/releases/latest" | jq -r .tag_name | sed s/v//g)
     [[ -z ${version_ffmpeg} ]] && exit 1
