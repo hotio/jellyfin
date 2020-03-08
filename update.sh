@@ -52,7 +52,7 @@ elif [[ ${1} == "checkdigests" ]]; then
 else
     version=$(curl -fsSL "https://repo.jellyfin.org/releases/server/ubuntu/nightly/" | grep -o ">jellyfin-nightly_.*.dsc<" | sed -e 's/>jellyfin-nightly_//g' -e 's/.dsc<//g')
     [[ -z ${version} ]] && exit 1
-    version_ffmpeg=$(curl -fsSL "https://api.github.com/repos/jellyfin/jellyfin-ffmpeg/releases/latest" | jq -r .tag_name | sed s/v//g)
+    version_ffmpeg=$(curl -fsSL "https://repo.jellyfin.org/releases/server/ubuntu/ffmpeg/" | grep -o ">jellyfin-ffmpeg_.*-bionic_amd64.deb<" | sed -e 's/>jellyfin-ffmpeg_//g' -e 's/-bionic_amd64.deb<//g')
     [[ -z ${version_ffmpeg} ]] && exit 1
 
     find . -type f -name '*.Dockerfile' -exec sed -i "s/ARG JELLYFIN_VERSION=.*$/ARG JELLYFIN_VERSION=${version}/g" {} \;
