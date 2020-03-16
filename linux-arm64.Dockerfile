@@ -21,7 +21,7 @@ ARG FFMPEG_VERSION=4.2.1-5
 # install ffmpeg
 RUN debfile="/tmp/ffmpeg.deb" && curl -fsSL -o "${debfile}" "https://repo.jellyfin.org/releases/server/ubuntu/ffmpeg/jellyfin-ffmpeg_${FFMPEG_VERSION}-bionic_arm64.deb" && dpkg --install "${debfile}" && rm "${debfile}"
 
-ARG JELLYFIN_VERSION=10.5.0-1
+ARG JELLYFIN_VERSION=10.5.1-1
 
 # install app
 RUN debfile="/tmp/jellyfin.deb" && curl -fsSL -o "${debfile}" "https://repo.jellyfin.org/releases/server/ubuntu/stable/jellyfin_${JELLYFIN_VERSION}_arm64.deb" && dpkg --install "${debfile}" && rm "${debfile}"
