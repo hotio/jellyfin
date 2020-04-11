@@ -28,7 +28,7 @@ const puppeteer = require('puppeteer');
   }
   await page.evaluate(() => {
     const div = document.createElement('div');
-    div.innerHTML = 'Image: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}<br>Commit: ${DRONE_COMMIT_SHA:0:7}<br>Build: #${DRONE_BUILD_NUMBER}<br>Timestamp: $(date -u --iso-8601=seconds)';
+    div.innerHTML = 'Image: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}<br>App Version: ${VERSION_FIELD}<br>Commit: ${DRONE_COMMIT_SHA:0:7}<br>Build: #${DRONE_BUILD_NUMBER}<br>Timestamp: $(date -u --iso-8601=seconds)';
     div.style.cssText = "all: initial !important; border-radius: 4px !important; font-weight: normal !important; font-size: normal !important; font-family: monospace !important; padding: 10px !important; color: black !important; position: fixed !important; bottom: 10px !important; right: 10px !important; background-color: #e7f3fe !important; border-left: 6px solid #2196F3 !important; z-index: 10000 !important";
     document.body.appendChild(div);
   });
@@ -54,13 +54,8 @@ else
     [[ -z ${version} ]] && exit 1
     version_ffmpeg=$(curl -fsSL "https://repo.jellyfin.org/releases/server/ubuntu/ffmpeg/" | grep -o ">jellyfin-ffmpeg_.*-bionic_amd64.deb<" | sed -e 's/>jellyfin-ffmpeg_//g' -e 's/-bionic_amd64.deb<//g')
     [[ -z ${version_ffmpeg} ]] && exit 1
-
-    find . -type f -name '*.Dockerfile' -exec sed -i "s/ARG JELLYFIN_VERSION=.*$/ARG JELLYFIN_VERSION=${version}/g" {} \;
-    sed -i "s/{TAG_VERSION=.*}$/{TAG_VERSION=${version}}/g" .drone.yml
-
-    find . -type f -name '*.Dockerfile' -exec sed -i "s/ARG FFMPEG_VERSION=.*$/ARG FFMPEG_VERSION=${version_ffmpeg}/g" {} \;
-
+    sed -i "s/{JELLYFIN_VERSION=[^}]*}/{JELLYFIN_VERSION=${version}}/g" .drone.yml
+    sed -i "s/{FFMPEG_VERSION=[^}]*}/{FFMPEG_VERSION=${version_ffmpeg}}/g" .drone.yml
     version="${version}/${version_ffmpeg}"
-
     echo "##[set-output name=version;]${version}"
 fi
