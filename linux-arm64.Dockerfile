@@ -7,7 +7,7 @@ EXPOSE 8096
 # install packages
 RUN apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
-        libass9 libbluray2 libdrm2 libfribidi0 libmp3lame0 libopus0 libtheora0 libva-drm2 libva2 libvdpau1 libvorbis0a libvorbisenc2 libwebp6 libwebpmux3 libx11-6 libx264-152 libx265-146 libzvbi0 libdrm-intel1 \
+        libass9 libbluray2 libdrm2 libfribidi0 libmp3lame0 libopus0 libtheora0 libva-drm2 libva2 libvdpau1 libvorbis0a libvorbisenc2 libwebp6 libwebpmux3 libx11-6 libx264-152 libx265-146 libzvbi0 \
         at \
         libfontconfig1 \
         libfreetype6 && \
