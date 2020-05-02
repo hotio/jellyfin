@@ -3,10 +3,10 @@
 
 umask "${UMASK}"
 
-JELLYFIN_CONFIG_DIR="${CONFIG_DIR}/app"      && export JELLYFIN_CONFIG_DIR
-JELLYFIN_DATA_DIR="${CONFIG_DIR}/app/data"   && export JELLYFIN_DATA_DIR
-JELLYFIN_LOG_DIR="${CONFIG_DIR}/app/log"     && export JELLYFIN_LOG_DIR
-JELLYFIN_CACHE_DIR="${CONFIG_DIR}/app/cache" && export JELLYFIN_CACHE_DIR
+[[ -z ${JELLYFIN_CONFIG_DIR} ]] && JELLYFIN_CONFIG_DIR="${CONFIG_DIR}/app"      && export JELLYFIN_CONFIG_DIR
+[[ -z ${JELLYFIN_DATA_DIR} ]]   && JELLYFIN_DATA_DIR="${CONFIG_DIR}/app/data"   && export JELLYFIN_DATA_DIR
+[[ -z ${JELLYFIN_LOG_DIR} ]]    && JELLYFIN_LOG_DIR="${CONFIG_DIR}/app/log"     && export JELLYFIN_LOG_DIR
+[[ -z ${JELLYFIN_CACHE_DIR} ]]  && JELLYFIN_CACHE_DIR="${CONFIG_DIR}/app/cache" && export JELLYFIN_CACHE_DIR
 
 redirect_cmd() {
     if [[ "${DEBUG}" == "yes" ]]; then
