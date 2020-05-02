@@ -38,7 +38,7 @@ You can also find tags that reference a commit or version number.
 
 ## Configuration location
 
-Your jellyfin configuration inside the container is stored in `/config/app`, to migrate from another container, you'd probably have to move your files from `/config` to `/config/app`. The following jellyfin path locations are used.
+Your jellyfin configuration inside the container is stored in `/config/app`, to migrate from another container, you'd probably have to move your files from `/config` to `/config/app`. The following jellyfin path locations are used by default.
 
 ```shell
 JELLYFIN_CONFIG_DIR="/config/app"
@@ -47,9 +47,11 @@ JELLYFIN_LOG_DIR="/config/app/log"
 JELLYFIN_CACHE_DIR="/config/app/cache"
 ```
 
+You can override these locations by setting them to a different value with a docker environment variable.
+
 ## Hardware support
 
-To make your hardware devices available inside the container use the following argument `--device=/dev/dri:/dev/dri` for Intel QuickSync and `--device=/dev/dvb:/dev/dvb` for a tuner. NVIDIA users should go visit the [NVIDIA github](https://github.com/NVIDIA/nvidia-docker) page for instructions. For Raspberry Pi OpenMAX you'll need to use `--device=/dev/vchiq:/dev/vchiq -v /opt/vc/lib:/opt/vc/lib`, V4L2 will need `--device=/dev/video10:/dev/video10 --device=/dev/video11:/dev/video11 --device=/dev/video12:/dev/video12` and MMAL needs `--device=/dev/vcsm:/dev/vcsm` or `--device=/dev/vc-mem:/dev/vc-mem`. For some methods it could happen that additional driver packages need to be installed. For example `i965-va-driver`, `mesa-va-drivers` or `libomxil-bellagio0 libomxil-bellagio-bin`. Use your own script to install these (see next section).
+To make your hardware devices available inside the container use the following argument `--device=/dev/dri:/dev/dri` for Intel QuickSync and `--device=/dev/dvb:/dev/dvb` for a tuner. NVIDIA users should go visit the [NVIDIA github](https://github.com/NVIDIA/nvidia-docker) page for instructions. For Raspberry Pi OpenMAX you'll need to use `--device=/dev/vchiq:/dev/vchiq -v /opt/vc/lib:/opt/vc/lib`, V4L2 will need `--device=/dev/video10:/dev/video10 --device=/dev/video11:/dev/video11 --device=/dev/video12:/dev/video12` and MMAL needs `--device=/dev/vcsm:/dev/vcsm` or `--device=/dev/vc-mem:/dev/vc-mem`. For some methods it could happen that additional driver packages need to be installed. For example `i965-va-driver`, `mesa-va-drivers` or `libomxil-bellagio0 libomxil-bellagio-bin`. Use your own script to install these (see next section). If demand is high enough, I might release a seperate tag with the drivers included.
 
 ## Executing your own scripts
 
