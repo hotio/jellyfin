@@ -42,7 +42,7 @@ Your jellyfin configuration inside the container is stored in `/config/app`, to 
 
 ## Hardware support
 
-To make your hardware devices available inside the container use the following argument `--device=/dev/dri:/dev/dri` for Intel QuickSync and `--device=/dev/dvb:/dev/dvb` for a tuner. NVIDIA users should go visit the [NVIDIA github](https://github.com/NVIDIA/nvidia-docker) page for instructions. For Raspberry Pi OpenMAX you'll need to use `--device=/dev/vchiq:/dev/vchiq -v /opt/vc/lib:/opt/vc/lib`, V4L2 will need `--device=/dev/video10:/dev/video10 --device=/dev/video11:/dev/video11 --device=/dev/video12:/dev/video12`. For some methods it could happen that additional driver packages need to be installed. For example `i965-va-driver`, `mesa-va-drivers` or `libomxil-bellagio0 libomxil-bellagio-bin`. Use your own script to install these (see next section).
+To make your hardware devices available inside the container use the following argument `--device=/dev/dri:/dev/dri` for Intel QuickSync and `--device=/dev/dvb:/dev/dvb` for a tuner. NVIDIA users should go visit the [NVIDIA github](https://github.com/NVIDIA/nvidia-docker) page for instructions. For Raspberry Pi OpenMAX you'll need to use `--device=/dev/vchiq:/dev/vchiq -v /opt/vc/lib:/opt/vc/lib`, V4L2 will need `--device=/dev/video10:/dev/video10 --device=/dev/video11:/dev/video11 --device=/dev/video12:/dev/video12` and MMAL needs `--device=/dev/vcsm:/dev/vcsm` or `--device=/dev/vc-mem:/dev/vc-mem`. For some methods it could happen that additional driver packages need to be installed. For example `i965-va-driver`, `mesa-va-drivers` or `libomxil-bellagio0 libomxil-bellagio-bin`. Use your own script to install these (see next section).
 
 ## Executing your own scripts
 
