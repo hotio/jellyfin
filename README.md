@@ -38,7 +38,14 @@ You can also find tags that reference a commit or version number.
 
 ## Configuration location
 
-Your jellyfin configuration inside the container is stored in `/config/app`, to migrate from another container, you'd probably have to move your files from `/config` to `/config/app`.
+Your jellyfin configuration inside the container is stored in `/config/app`, to migrate from another container, you'd probably have to move your files from `/config` to `/config/app`. The following jellyfin path locations are used.
+
+```shell
+JELLYFIN_CONFIG_DIR="/config/app"
+JELLYFIN_DATA_DIR="/config/app/data"
+JELLYFIN_LOG_DIR="/config/app/log"
+JELLYFIN_CACHE_DIR="/config/app/cache"
+```
 
 ## Hardware support
 
