@@ -11,7 +11,9 @@ RUN apt update && \
         at \
         libfontconfig1 \
         libfreetype6 \
-        libdrm-intel1 && \
+        libdrm-intel1 \
+        i965-va-driver \
+        mesa-va-drivers && \
 # clean up
     apt autoremove -y && \
     apt clean && \

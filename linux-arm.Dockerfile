@@ -15,6 +15,8 @@ RUN apt update && \
         at \
         libfontconfig1 \
         libfreetype6 \
+        libomxil-bellagio0 \
+        libomxil-bellagio-bin \
         libraspberrypi0 && \
 # clean up
     apt purge -y gnupg && \
