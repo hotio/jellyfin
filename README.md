@@ -1,6 +1,6 @@
 # jellyfin
 
-<img src="https://raw.githubusercontent.com/hotio/unraid-templates/master/hotio/img/jellyfin.png" alt="Logo" height="130" width="130">
+<img src="https://raw.githubusercontent.com/hotio/docker-jellyfin/master/img/jellyfin.png" alt="Logo" height="130" width="130">
 
 [![GitHub](https://img.shields.io/badge/source-github-lightgrey)](https://github.com/hotio/docker-jellyfin)
 [![Docker Pulls](https://img.shields.io/docker/pulls/hotio/jellyfin)](https://hub.docker.com/r/hotio/jellyfin)
