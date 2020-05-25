@@ -28,7 +28,6 @@ ARG JELLYFIN_VERSION
 
 # install app
 RUN debfile="/tmp/jellyfin.deb" && curl -fsSL -o "${debfile}" "https://repo.jellyfin.org/releases/server/ubuntu/nightly/jellyfin-server-nightly_${JELLYFIN_VERSION}_amd64.deb" && dpkg --install "${debfile}" && rm "${debfile}" && \
-    debfile="/tmp/jellyfin.deb" && curl -fsSL -o "${debfile}" "https://repo.jellyfin.org/releases/server/ubuntu/nightly/jellyfin-web-nightly_${JELLYFIN_VERSION}_all.deb" && dpkg --install "${debfile}" && rm "${debfile}" && \
-    ln -s /usr/share/jellyfin/web /usr/lib/jellyfin/bin/jellyfin-web
+    debfile="/tmp/jellyfin.deb" && curl -fsSL -o "${debfile}" "https://repo.jellyfin.org/releases/server/ubuntu/nightly/jellyfin-web-nightly_${JELLYFIN_VERSION}_all.deb" && dpkg --install "${debfile}" && rm "${debfile}"
 
 COPY root/ /
