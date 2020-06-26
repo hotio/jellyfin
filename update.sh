@@ -50,9 +50,9 @@ elif [[ ${1} == "checkdigests" ]]; then
     digest=$(echo "${manifest}" | jq -r '.manifests[] | select (.platform.architecture == "arm" and .platform.os == "linux").digest')   && sed -i "s#FROM ${image}.*\$#FROM ${image}@${digest}#g" ./linux-arm.Dockerfile   && echo "${digest}"
     digest=$(echo "${manifest}" | jq -r '.manifests[] | select (.platform.architecture == "arm64" and .platform.os == "linux").digest') && sed -i "s#FROM ${image}.*\$#FROM ${image}@${digest}#g" ./linux-arm64.Dockerfile && echo "${digest}"
 else
-    version=$(curl -fsSL "https://repo.jellyfin.org/releases/server/ubuntu/nightly/" | grep -o ">jellyfin-server-nightly_.*_amd64.deb<" | sed -e 's/>jellyfin-server-nightly_//g' -e 's/_amd64.deb<//g' | sort -r | head -1)
+    version=$(curl -fsSL "https://repo.jellyfin.org/releases/server/ubuntu/unstable/server/" | grep -o ">jellyfin-server_.*-unstable_amd64.deb<" | sed -e 's/>jellyfin-server_//g' -e 's/-unstable_amd64.deb<//g' | sort -r | head -1)
     [[ -z ${version} ]] && exit 1
-    version_web=$(curl -fsSL "https://repo.jellyfin.org/releases/server/ubuntu/nightly/" | grep -o ">jellyfin-web-nightly_.*_all.deb<" | sed -e 's/>jellyfin-web-nightly_//g' -e 's/_all.deb<//g' | sort -r | head -1)
+    version_web=$(curl -fsSL "https://repo.jellyfin.org/releases/server/ubuntu/unstable/web/" | grep -o ">jellyfin-web_.*-unstable_all.deb<" | sed -e 's/>jellyfin-web_//g' -e 's/-unstable_all.deb<//g' | sort -r | head -1)
     [[ -z ${version_web} ]] && exit 1
     version_ffmpeg=$(curl -fsSL "https://repo.jellyfin.org/releases/server/ubuntu/ffmpeg/" | grep -o ">jellyfin-ffmpeg_.*-bionic_amd64.deb<" | sed -e 's/>jellyfin-ffmpeg_//g' -e 's/-bionic_amd64.deb<//g')
     [[ -z ${version_ffmpeg} ]] && exit 1
