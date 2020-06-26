@@ -27,7 +27,7 @@ ARG JELLYFIN_VERSION
 ARG JELLYFIN_WEB_VERSION
 
 # install app
-RUN debfile="/tmp/jellyfin.deb" && curl -fsSL -o "${debfile}" "https://repo.jellyfin.org/releases/server/ubuntu/unstable/jellyfin-server_${JELLYFIN_VERSION}-unstable_arm64.deb" && dpkg --install "${debfile}" && rm "${debfile}" && \
-    debfile="/tmp/jellyfin.deb" && curl -fsSL -o "${debfile}" "https://repo.jellyfin.org/releases/server/ubuntu/unstable/jellyfin-web_${JELLYFIN_WEB_VERSION}-unstable_all.deb" && dpkg --install "${debfile}" && rm "${debfile}"
+RUN debfile="/tmp/jellyfin.deb" && curl -fsSL -o "${debfile}" "https://repo.jellyfin.org/releases/server/ubuntu/unstable/server/jellyfin-server_${JELLYFIN_VERSION}-unstable_arm64.deb" && dpkg --install "${debfile}" && rm "${debfile}" && \
+    debfile="/tmp/jellyfin.deb" && curl -fsSL -o "${debfile}" "https://repo.jellyfin.org/releases/server/ubuntu/unstable/web/jellyfin-web_${JELLYFIN_WEB_VERSION}-unstable_all.deb" && dpkg --install "${debfile}" && rm "${debfile}"
 
 COPY root/ /
