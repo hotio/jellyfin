@@ -50,12 +50,15 @@ elif [[ ${1} == "checkdigests" ]]; then
     digest=$(echo "${manifest}" | jq -r '.manifests[] | select (.platform.architecture == "arm" and .platform.os == "linux").digest')   && sed -i "s#FROM ${image}.*\$#FROM ${image}@${digest}#g" ./linux-arm.Dockerfile   && echo "${digest}"
     digest=$(echo "${manifest}" | jq -r '.manifests[] | select (.platform.architecture == "arm64" and .platform.os == "linux").digest') && sed -i "s#FROM ${image}.*\$#FROM ${image}@${digest}#g" ./linux-arm64.Dockerfile && echo "${digest}"
 else
-    version=$(curl -fsSL "https://repo.jellyfin.org/releases/server/ubuntu/stable/" | grep -o ">jellyfin_.*_amd64.deb<" | sed -e 's/>jellyfin_//g' -e 's/_amd64.deb<//g')
+    version=$(curl -fsSL "https://repo.jellyfin.org/releases/server/ubuntu/stable/server/" | grep -o ">jellyfin-server_.*_amd64.deb<" | sed -e 's/>jellyfin-server_//g' -e 's/_amd64.deb<//g' | sort -r | head -1)
     [[ -z ${version} ]] && exit 1
+    version_web=$(curl -fsSL "https://repo.jellyfin.org/releases/server/ubuntu/stable/web/" | grep -o ">jellyfin-web_.*_all.deb<" | sed -e 's/>jellyfin-web_//g' -e 's/_all.deb<//g' | sort -r | head -1)
+    [[ -z ${version_web} ]] && exit 1
     version_ffmpeg=$(curl -fsSL "https://repo.jellyfin.org/releases/server/ubuntu/ffmpeg/" | grep -o ">jellyfin-ffmpeg_.*-bionic_amd64.deb<" | sed -e 's/>jellyfin-ffmpeg_//g' -e 's/-bionic_amd64.deb<//g')
     [[ -z ${version_ffmpeg} ]] && exit 1
     sed -i "s/{JELLYFIN_VERSION=[^}]*}/{JELLYFIN_VERSION=${version}}/g" .drone.yml
+    sed -i "s/{JELLYFIN_WEB_VERSION=[^}]*}/{JELLYFIN_WEB_VERSION=${version_web}}/g" .drone.yml
     sed -i "s/{FFMPEG_VERSION=[^}]*}/{FFMPEG_VERSION=${version_ffmpeg}}/g" .drone.yml
-    version="${version}/${version_ffmpeg}"
+    version="${version}/${version_web}/${version_ffmpeg}"
     echo "##[set-output name=version;]${version}"
 fi
