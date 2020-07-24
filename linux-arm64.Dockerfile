@@ -1,4 +1,4 @@
-FROM hotio/base@sha256:df49443e2ae38469c6d15e4ba67e0dbaf38a7d3649516f56de44a5068c58c7e4
+FROM hotio/base@sha256:5295e386d84bba2bb18cccc671dfea034c5a31800cd0a34a769129eded9a60a4
 
 ARG DEBIAN_FRONTEND="noninteractive"
 
@@ -7,7 +7,7 @@ EXPOSE 8096
 # install packages
 RUN apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
-        libicu66 \
+        libicu60 \
         libass9 libbluray2 libdrm2 libfribidi0 libmp3lame0 libopus0 libtheora0 libva-drm2 libva2 libvdpau1 libvorbis0a libvorbisenc2 libwebp6 libwebpmux3 libx11-6 libx264-152 libx265-146 libzvbi0 \
         at \
         libfontconfig1 \

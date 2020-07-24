@@ -1,4 +1,4 @@
-FROM hotio/base@sha256:4f26fe7bb656f83929e2da7622aed5267975bcf8ee523b6f3068ca024bcc1717
+FROM hotio/base@sha256:a2d73fa7ac32be3238774614fce3eed8fe6535907f6804131ce41d106ea04d96
 
 ARG DEBIAN_FRONTEND="noninteractive"
 
@@ -11,7 +11,7 @@ RUN apt update && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 6587FFD6536B8826E88A62547876AE518CBCF2F2 && echo "deb http://ppa.launchpad.net/ubuntu-raspi2/ppa/ubuntu bionic main" | tee /etc/apt/sources.list.d/raspberrypi.list && \
     apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
-        libicu66 \
+        libicu60 \
         libass9 libbluray2 libdrm2 libfribidi0 libmp3lame0 libopus0 libtheora0 libva-drm2 libva2 libvdpau1 libvorbis0a libvorbisenc2 libwebp6 libwebpmux3 libx11-6 libx264-152 libx265-146 libzvbi0 \
         at \
         libfontconfig1 \
