@@ -22,4 +22,3 @@ else
     version="${version}/${version_web}/${version_ffmpeg}"
     echo "##[set-output name=version;]${version}"
 fi
-
