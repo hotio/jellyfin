@@ -48,8 +48,8 @@ jobs:
             --build-arg LABEL_SOURCE="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/tree/${GITHUB_REF//refs\/heads\//}" \
             --build-arg LABEL_VENDOR="${GITHUB_REPOSITORY%/*}" \
             --build-arg LABEL_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/blob/master/README.md" \
-            --build-arg LABEL_VERSION="${JELLYFIN_VERSION=20200905.6}" \
-            --build-arg JELLYFIN_VERSION="${JELLYFIN_VERSION=20200905.6}" \
+            --build-arg LABEL_VERSION="${JELLYFIN_VERSION=20200911.1}" \
+            --build-arg JELLYFIN_VERSION="${JELLYFIN_VERSION=20200911.1}" \
             --build-arg JELLYFIN_WEB_VERSION=${JELLYFIN_WEB_VERSION=20200910.10} \
             --build-arg FFMPEG_VERSION=${FFMPEG_VERSION=4.3.1-1} \
             --file ./${ARCHITECTURE}.Dockerfile ./
@@ -117,8 +117,8 @@ jobs:
             TAG="${TAG_BASE}-${GITHUB_SHA:0:7}-${GITHUB_RUN_NUMBER}"
             docker manifest create ${registry}/${TAG_BASE} --amend ${registry}/${TAG}-linux-amd64 --amend ${registry}/${TAG}-linux-arm-v7 --amend ${registry}/${TAG}-linux-arm64
             docker manifest push   ${registry}/${TAG_BASE}
-            docker manifest create ${registry}/${TAG_BASE}-${JELLYFIN_VERSION=20200905.6} --amend ${registry}/${TAG}-linux-amd64 --amend ${registry}/${TAG}-linux-arm-v7 --amend ${registry}/${TAG}-linux-arm64
-            docker manifest push   ${registry}/${TAG_BASE}-${JELLYFIN_VERSION=20200905.6}
+            docker manifest create ${registry}/${TAG_BASE}-${JELLYFIN_VERSION=20200911.1} --amend ${registry}/${TAG}-linux-amd64 --amend ${registry}/${TAG}-linux-arm-v7 --amend ${registry}/${TAG}-linux-arm64
+            docker manifest push   ${registry}/${TAG_BASE}-${JELLYFIN_VERSION=20200911.1}
             docker manifest create ${registry}/${TAG_BASE}-${GITHUB_SHA:0:7} --amend ${registry}/${TAG}-linux-amd64 --amend ${registry}/${TAG}-linux-arm-v7 --amend ${registry}/${TAG}-linux-arm64
             docker manifest push   ${registry}/${TAG_BASE}-${GITHUB_SHA:0:7}
             if [[ ${GITHUB_REF//refs\/heads\//} == stable ]]; then
@@ -140,4 +140,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           curl -u "${GITHUB_REPOSITORY%/*}:${GITHUB_TOKEN}" -fsSL https://gist.githubusercontent.com/${GITHUB_REPOSITORY%/*}/3d98159d47e0bf5eccbff221f1288472/raw/discord-action-notify.sh > discord-action-notify.sh
-          export VERSION_FIELD=${JELLYFIN_VERSION=20200905.6} && bash discord-action-notify.sh
+          export VERSION_FIELD=${JELLYFIN_VERSION=20200911.1} && bash discord-action-notify.sh
