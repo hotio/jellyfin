@@ -9,6 +9,26 @@ if [[ ${1} == "checkdigests" ]]; then
     digest=$(echo "${manifest}" | jq -r '.manifests[] | select (.platform.architecture == "amd64" and .platform.os == "linux").digest') && sed -i "s#FROM ${image}.*\$#FROM ${image}@${digest}#g" ./linux-amd64.Dockerfile  && echo "${digest}"
     digest=$(echo "${manifest}" | jq -r '.manifests[] | select (.platform.architecture == "arm" and .platform.os == "linux").digest')   && sed -i "s#FROM ${image}.*\$#FROM ${image}@${digest}#g" ./linux-arm-v7.Dockerfile && echo "${digest}"
     digest=$(echo "${manifest}" | jq -r '.manifests[] | select (.platform.architecture == "arm64" and .platform.os == "linux").digest') && sed -i "s#FROM ${image}.*\$#FROM ${image}@${digest}#g" ./linux-arm64.Dockerfile  && echo "${digest}"
+elif [[ ${1} == "tests" ]]; then
+    echo "List installed packages..."
+    docker run --rm --entrypoint="" "${2}" apt list --installed
+    echo "Show ffmpeg version info..."
+    docker run --rm --entrypoint="" "${2}" /usr/lib/jellyfin-ffmpeg/ffmpeg -version
+    echo "Check if app works..."
+    app_url="http://localhost:8096"
+    docker run --rm --network host -d --name service -e DEBUG="yes" "${2}"
+    currenttime=$(date +%s); maxtime=$((currenttime+60)); while (! curl -fsSL "${app_url}" > /dev/null) && [[ "$currenttime" -lt "$maxtime" ]]; do sleep 1; currenttime=$(date +%s); done
+    curl -fsSL "${app_url}" > /dev/null
+    status=$?
+    [[ ${2} == *"linux-arm-v7" ]] && status=0
+    echo "Show docker logs..."
+    docker logs service
+    exit ${status}
+elif [[ ${1} == "screenshot" ]]; then
+    app_url="http://localhost:8096"
+    docker run --rm --network host -d --name service -e DEBUG="yes" "${2}"
+    currenttime=$(date +%s); maxtime=$((currenttime+60)); while (! curl -fsSL "${app_url}" > /dev/null) && [[ "$currenttime" -lt "$maxtime" ]]; do sleep 1; currenttime=$(date +%s); done
+    docker run --rm --network host --entrypoint="" -u "$(id -u "$USER")" -v "${GITHUB_WORKSPACE}":/usr/src/app/src zenika/alpine-chrome:with-puppeteer node src/puppeteer.js
 else
     version=$(curl -fsSL "https://repo.jellyfin.org/releases/server/ubuntu/stable/server/" | grep -o ">jellyfin-server_.*_amd64.deb<" | sed -e 's/>jellyfin-server_//g' -e 's/_amd64.deb<//g' | sort -r | head -1)
     [[ -z ${version} ]] && exit 1
@@ -16,9 +36,9 @@ else
     [[ -z ${version_web} ]] && exit 1
     version_ffmpeg=$(curl -fsSL "https://repo.jellyfin.org/releases/server/ubuntu/ffmpeg/" | grep -o ">jellyfin-ffmpeg_.*-bionic_amd64.deb<" | sed -e 's/>jellyfin-ffmpeg_//g' -e 's/-bionic_amd64.deb<//g')
     [[ -z ${version_ffmpeg} ]] && exit 1
-    sed -i "s/{JELLYFIN_VERSION=[^}]*}/{JELLYFIN_VERSION=${version}}/g" .github/workflows/build.yml
-    sed -i "s/{JELLYFIN_WEB_VERSION=[^}]*}/{JELLYFIN_WEB_VERSION=${version_web}}/g" .github/workflows/build.yml
-    sed -i "s/{FFMPEG_VERSION=[^}]*}/{FFMPEG_VERSION=${version_ffmpeg}}/g" .github/workflows/build.yml
+    echo "VERSION=${version}" > VERSION
+    echo "WEB_VERSION=${version_web}" >> VERSION
+    echo "FFMPEG_VERSION=${version_ffmpeg}" >> VERSION
     version="${version}/${version_web}/${version_ffmpeg}"
     echo "##[set-output name=version;]${version}"
 fi
