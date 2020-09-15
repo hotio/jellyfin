@@ -29,6 +29,7 @@ jobs:
       env:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         VERSION: ${{ steps.update_files.outputs.version }}
+        TAG: ${{ matrix.branch }}
       run: |
-        json='{"embeds": [{"title": "'${GITHUB_REPOSITORY//docker-/}'","description": "Updated version `'${VERSION}'` detected for tag `'${GITHUB_REF//refs\/heads\//}'`.","color": 4886754,"footer": {"text": "Powered by GitHub Actions"},"timestamp": "'$(date -u --iso-8601=seconds)'"}]}'
+        json='{"embeds": [{"title": "'${GITHUB_REPOSITORY//docker-/}'","description": "Updated version `'${VERSION}'` detected for tag `'${TAG}'`.","color": 4886754,"footer": {"text": "Powered by GitHub Actions"},"timestamp": "'$(date -u --iso-8601=seconds)'"}]}'
         curl -fsSL -X POST -H "Content-Type: application/json" -d "${json}" "${DISCORD_WEBHOOK}"
