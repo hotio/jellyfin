@@ -13,27 +13,28 @@
 
 Just the basics to get the container running:
 
-```shell
-docker run --rm --name jellyfin -p 8096:8096 -v /<host_folder_config>:/config hotio/jellyfin
+```shell hl_lines="4 5 6 7 8 9"
+docker run --rm \
+    --name jellyfin \
+    -p 8096:8096 \
+    -e PUID=1000 \
+    -e PGID=1000 \
+    -e UMASK=002 \
+    -e TZ="Etc/UTC" \
+    -e ARGS="" \
+    -e DEBUG="no" \
+    -v /<host_folder_config>:/config \
+    hotio/jellyfin
 ```
 
-The environment variables below are all optional, the values you see are the defaults.
-
-```shell
--e PUID=1000
--e PGID=1000
--e UMASK=002
--e TZ="Etc/UTC"
--e ARGS=""
--e DEBUG="no"
-```
+The [highlighted](https://hotio.dev/containers/jellyfin) variables are all optional, the values you see are the defaults.
 
 ## Tags
 
-| Tag              | Upstream                      |
-| -----------------|-------------------------------|
-| release (latest) | Releases                      |
-| nightly          | Every commit to master branch |
+| Tag                | Upstream                      |
+| -------------------|-------------------------------|
+| `release` (latest) | Releases                      |
+| `nightly`          | Every commit to master branch |
 
 You can also find tags that reference a commit or version number.
 
