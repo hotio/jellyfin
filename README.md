@@ -1,6 +1,6 @@
 # jellyfin
 
-<img src="https://raw.githubusercontent.com/hotio/docker-jellyfin/master/img/jellyfin.png" alt="Logo" height="130" width="130">
+<img src="https://hotio.dev/img/jellyfin.png" alt="Logo" height="130" width="130">
 
 ![Base](https://img.shields.io/badge/base-ubuntu-orange)
 [![GitHub](https://img.shields.io/badge/source-github-lightgrey)](https://github.com/hotio/docker-jellyfin)
