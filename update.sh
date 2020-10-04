@@ -40,6 +40,7 @@ else
     echo "VERSION=${version}" > VERSION
     echo "WEB_VERSION=${version_web}" >> VERSION
     echo "FFMPEG_VERSION=${version_ffmpeg}" >> VERSION
+    echo '{"version":"'"${version}"'"}' > VERSION.json
     version="${version}/${version_web}/${version_ffmpeg}"
     echo "##[set-output name=version;]${version}"
 fi
