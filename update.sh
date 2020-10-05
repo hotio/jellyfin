@@ -37,10 +37,7 @@ else
     [[ -z ${version_web} ]] && exit 1
     version_ffmpeg=$(curl -fsSL "https://repo.jellyfin.org/releases/server/ubuntu/ffmpeg/" | grep -o ">jellyfin-ffmpeg_.*-bionic_amd64.deb<" | sed -e 's/>jellyfin-ffmpeg_//g' -e 's/-bionic_amd64.deb<//g')
     [[ -z ${version_ffmpeg} ]] && exit 1
-    echo "VERSION=${version}" > VERSION
-    echo "WEB_VERSION=${version_web}" >> VERSION
-    echo "FFMPEG_VERSION=${version_ffmpeg}" >> VERSION
-    echo '{"version":"'"${version}"'"}' > VERSION.json
+    echo '{"version":"'"${version}"'","web_version":"'"${version_web}"'","ffmpeg_version":"'"${version_ffmpeg}"'"}' | jq . > VERSION.json
     version="${version}/${version_web}/${version_ffmpeg}"
     echo "##[set-output name=version;]${version}"
 fi
