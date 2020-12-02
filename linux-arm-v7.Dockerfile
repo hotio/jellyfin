@@ -26,7 +26,7 @@ RUN apt update && \
     rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
 ARG FFMPEG_VERSION
-RUN debfile="/tmp/ffmpeg.deb" && curl -fsSL -o "${debfile}" "https://repo.jellyfin.org/releases/server/ubuntu/ffmpeg/jellyfin-ffmpeg_${FFMPEG_VERSION}-bionic_armhf.deb" && dpkg --install "${debfile}" && rm "${debfile}"
+RUN debfile="/tmp/ffmpeg.deb" && curl -fsSL -o "${debfile}" "https://repo.jellyfin.org/releases/server/ubuntu/ffmpeg/jellyfin-ffmpeg_${FFMPEG_VERSION}-focal_armhf.deb" && dpkg --install "${debfile}" && rm "${debfile}"
 
 ARG VERSION
 ARG WEB_VERSION
