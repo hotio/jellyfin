@@ -15,7 +15,7 @@ RUN apt update && \
         libdrm-intel1 \
         i965-va-driver \
         mesa-va-drivers \
-        intel-media-va-driver && \
+        intel-media-va-driver-non-free && \
 # clean up
     apt autoremove -y && \
     apt clean && \
