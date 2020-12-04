@@ -7,7 +7,6 @@ EXPOSE 8096
 # install packages
 RUN apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
-        lftp \
         libicu66 \
         libass9 libbluray2 libdrm2 libfribidi0 libmp3lame0 libopus0 libtheora0 libva-drm2 libva2 libvdpau1 libvorbis0a libvorbisenc2 libwebp6 libwebpmux3 libx11-6 libx264-155 libx265-179 libzvbi0 libvpx6 \
         at \
@@ -21,11 +20,11 @@ RUN apt update && \
     rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
 ARG FFMPEG_VERSION
-RUN debfile="/tmp/ffmpeg.deb" && lftp -c "get1 -o ${debfile} https://repo.jellyfin.org/releases/server/ubuntu/ffmpeg/jellyfin-ffmpeg_${FFMPEG_VERSION}-focal_arm64.deb" && dpkg --install "${debfile}" && rm "${debfile}"
+RUN debfile="/tmp/ffmpeg.deb" && wget2 -nc -O "${debfile}" "https://repo.jellyfin.org/releases/server/ubuntu/ffmpeg/jellyfin-ffmpeg_${FFMPEG_VERSION}-focal_arm64.deb" && dpkg --install "${debfile}" && rm "${debfile}"
 
 ARG VERSION
 ARG WEB_VERSION
-RUN debfile="/tmp/jellyfin.deb" && lftp -c "get1 -o ${debfile} https://repo.jellyfin.org/releases/server/ubuntu/stable/server/jellyfin-server_${VERSION}_arm64.deb" && dpkg --install "${debfile}" && rm "${debfile}" && \
-    debfile="/tmp/jellyfin.deb" && lftp -c "get1 -o ${debfile} https://repo.jellyfin.org/releases/server/ubuntu/stable/web/jellyfin-web_${WEB_VERSION}_all.deb" && dpkg --install "${debfile}" && rm "${debfile}"
+RUN debfile="/tmp/jellyfin.deb" && wget2 -nc -O "${debfile}" "https://repo.jellyfin.org/releases/server/ubuntu/stable/server/jellyfin-server_${VERSION}_arm64.deb" && dpkg --install "${debfile}" && rm "${debfile}" && \
+    debfile="/tmp/jellyfin.deb" && wget2 -nc -O "${debfile}" "https://repo.jellyfin.org/releases/server/ubuntu/stable/web/jellyfin-web_${WEB_VERSION}_all.deb" && dpkg --install "${debfile}" && rm "${debfile}"
 
 COPY root/ /
