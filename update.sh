@@ -35,7 +35,7 @@ else
     [[ -z ${version} ]] && exit 1
     version_web=$(curl -fsSL "https://repo.jellyfin.org/releases/server/ubuntu/stable/web/" | grep -o ">jellyfin-web_.*_all.deb<" | sed -e 's/>jellyfin-web_//g' -e 's/_all.deb<//g' | sort -r | head -1)
     [[ -z ${version_web} ]] && exit 1
-    version_ffmpeg=$(curl -fsSL "https://repo.jellyfin.org/releases/server/ubuntu/ffmpeg/" | grep -o ">jellyfin-ffmpeg_.*-bionic_amd64.deb<" | sed -e 's/>jellyfin-ffmpeg_//g' -e 's/-bionic_amd64.deb<//g')
+    version_ffmpeg=$(curl -fsSL "https://repo.jellyfin.org/releases/server/ubuntu/ffmpeg/" | grep -o ">jellyfin-ffmpeg_.*-focal_amd64.deb<" | sed -e 's/>jellyfin-ffmpeg_//g' -e 's/-focal_amd64.deb<//g')
     [[ -z ${version_ffmpeg} ]] && exit 1
     echo '{"version":"'"${version}"'","web_version":"'"${version_web}"'","ffmpeg_version":"'"${version_ffmpeg}"'"}' | jq . > VERSION.json
     version="${version}/${version_web}/${version_ffmpeg}"
