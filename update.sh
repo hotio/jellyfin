@@ -39,5 +39,4 @@ else
     [[ -z ${version_ffmpeg} ]] && exit 1
     echo '{"version":"'"${version}"'","web_version":"'"${version_web}"'","ffmpeg_version":"'"${version_ffmpeg}"'"}' | jq . > VERSION.json
     version="${version}/${version_web}/${version_ffmpeg}"
-    echo "##[set-output name=version;]${version}"
 fi
