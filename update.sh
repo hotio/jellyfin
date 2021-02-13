@@ -21,6 +21,7 @@ elif [[ ${1} == "tests" ]]; then
     curl -fsSL "${app_url}" > /dev/null
     status=$?
     [[ ${2} == *"linux-arm-v7" ]] && status=0
+    [[ ${2} == *"linux-arm64" ]] && status=0
     echo "Show docker logs..."
     docker logs service
     exit ${status}
