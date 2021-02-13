@@ -16,7 +16,7 @@ elif [[ ${1} == "tests" ]]; then
     docker run --rm --entrypoint="" "${2}" /usr/lib/jellyfin-ffmpeg/ffmpeg -version
     echo "Check if app works..."
     app_url="http://localhost:8096"
-    docker run --rm --network host -d --name service -e DEBUG="yes" "${2}"
+    docker run --network host -d --name service -e DEBUG="yes" "${2}"
     currenttime=$(date +%s); maxtime=$((currenttime+60)); while (! curl -fsSL "${app_url}" > /dev/null) && [[ "$currenttime" -lt "$maxtime" ]]; do sleep 1; currenttime=$(date +%s); done
     curl -fsSL "${app_url}" > /dev/null
     status=$?
