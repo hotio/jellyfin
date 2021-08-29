@@ -12,6 +12,7 @@ RUN apt update && \
         at \
         libfontconfig1 \
         libfreetype6 \
+        nvidia-opencl-icd-340 \
         libdrm-intel1 \
         i965-va-driver \
         mesa-va-drivers && \
