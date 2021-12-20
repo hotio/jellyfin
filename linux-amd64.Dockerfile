@@ -7,11 +7,7 @@ EXPOSE 8096
 # install packages
 RUN apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
-        at \
-        libfontconfig1 \
-        libfreetype6 \
         nvidia-opencl-icd-340 \
-        libdrm-intel1 \
         i965-va-driver \
         mesa-va-drivers && \
 # clean up
@@ -40,8 +36,8 @@ RUN apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
         gnupg && \
     curl -fsSL "https://repo.jellyfin.org/ubuntu/jellyfin_team.gpg.key" | apt-key add - && \
-    echo 'deb [arch=amd64] https://repo.jellyfin.org/ubuntu focal main' | tee /etc/apt/sources.list.d/jellyfin.list && \
-    echo 'deb [arch=amd64] https://repo.jellyfin.org/ubuntu focal unstable' | tee -a /etc/apt/sources.list.d/jellyfin.list && \
+    echo "deb [arch=amd64] https://repo.jellyfin.org/ubuntu focal main" | tee /etc/apt/sources.list.d/jellyfin.list && \
+    echo "deb [arch=amd64] https://repo.jellyfin.org/ubuntu focal unstable" | tee -a /etc/apt/sources.list.d/jellyfin.list && \
     apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
         jellyfin-server=${VERSION}-unstable \
