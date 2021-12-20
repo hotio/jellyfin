@@ -44,7 +44,9 @@ RUN apt update && \
     echo 'deb [arch=amd64] https://repo.jellyfin.org/ubuntu focal unstable' | tee -a /etc/apt/sources.list.d/jellyfin.list && \
     apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
-        jellyfin=${VERSION}-unstable && \
+        jellyfin-server=${VERSION}-unstable \
+        jellyfin-web \
+        jellyfin-ffmpeg && \
 # clean up
     apt purge -y gnupg && \
     apt autoremove -y && \
