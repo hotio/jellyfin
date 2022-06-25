@@ -9,5 +9,4 @@ umask "${UMASK}"
 [[ -z ${JELLYFIN_CACHE_DIR} ]]   && JELLYFIN_CACHE_DIR="${CONFIG_DIR}/cache"    && export JELLYFIN_CACHE_DIR
 [[ -z ${JELLYFIN_WEB_DIR} ]]     && JELLYFIN_WEB_DIR="/usr/share/jellyfin/web"  && export JELLYFIN_WEB_DIR
 
-
 exec s6-setuidgid hotio "/usr/bin/jellyfin" --ffmpeg="/usr/lib/jellyfin-ffmpeg/ffmpeg"
