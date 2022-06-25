@@ -33,7 +33,7 @@ RUN apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
         jellyfin-server=${VERSION}-unstable \
         jellyfin-web \
-        jellyfin-ffmpeg && \
+        jellyfin-ffmpeg5 && \
 # clean up
     apt purge -y gnupg && \
     apt autoremove -y && \
