@@ -40,3 +40,4 @@ RUN apt update && \
     rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
 COPY root/ /
+RUN chmod -R +x /etc/cont-init.d/ /etc/services.d/
