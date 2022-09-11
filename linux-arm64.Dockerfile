@@ -9,7 +9,7 @@ RUN apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
         gnupg && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 6587FFD6536B8826E88A62547876AE518CBCF2F2 && \
-    echo "deb http://ppa.launchpad.net/ubuntu-raspi2/ppa-nightly/ubuntu jammy main" | tee /etc/apt/sources.list.d/raspberrypi.list && \
+    echo "deb http://ppa.launchpad.net/ubuntu-raspi2/ppa-nightly/ubuntu focal main" | tee /etc/apt/sources.list.d/raspberrypi.list && \
     apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
         libomxil-bellagio0 \
@@ -27,8 +27,8 @@ RUN apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
         gnupg && \
     curl -fsSL "https://repo.jellyfin.org/ubuntu/jellyfin_team.gpg.key" | apt-key add - && \
-    echo "deb [arch=arm64] https://repo.jellyfin.org/ubuntu jammy main" | tee /etc/apt/sources.list.d/jellyfin.list && \
-    echo "deb [arch=arm64] https://repo.jellyfin.org/ubuntu jammy unstable" | tee -a /etc/apt/sources.list.d/jellyfin.list && \
+    echo "deb [arch=arm64] https://repo.jellyfin.org/ubuntu focal main" | tee /etc/apt/sources.list.d/jellyfin.list && \
+    echo "deb [arch=arm64] https://repo.jellyfin.org/ubuntu focal unstable" | tee -a /etc/apt/sources.list.d/jellyfin.list && \
     apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
         jellyfin-server=${VERSION}-unstable \
