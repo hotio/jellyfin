@@ -11,6 +11,7 @@ VOLUME ["${CONFIG_DIR}"]
 RUN apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
         nvidia-opencl-icd-340 \
+        intel-opencl-icd \
         i965-va-driver \
         mesa-va-drivers && \
 # clean up
