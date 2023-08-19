@@ -35,7 +35,7 @@ RUN apt update && \
     mkdir /tmp/intel-compute-runtime && \
     cd /tmp/intel-compute-runtime && \
     RUNTIME_URLS=$(curl -sX GET "https://api.github.com/repos/intel/compute-runtime/releases/tags/$(curl -sX GET "https://api.github.com/repos/intel/compute-runtime/releases/latest" | jq -r '.tag_name')" | jq -r '.body' | grep wget | grep -v .sum | grep -v .ddeb | sed 's|wget ||g') && \
-    for url in ${RUNTIME_URLS}; do wget "${url}"; done && \
+    for url in ${RUNTIME_URLS}; do curl -o $(basename "${url%$'\r'}") -L "${url%$'\r'}"; done && \
     dpkg -i *.deb && \
     cd .. && \
     rm -rf /tmp/intel-compute-runtime
