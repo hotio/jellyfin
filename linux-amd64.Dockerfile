@@ -16,6 +16,8 @@ RUN apt update && \
     echo "deb [arch=amd64] https://repo.jellyfin.org/ubuntu focal main" | tee /etc/apt/sources.list.d/jellyfin.list && \
     apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
+        wget \
+        ocl-icd-libopencl1 \
         jellyfin-server=${VERSION} \
         jellyfin-web \
         jellyfin-ffmpeg5 && \
@@ -25,20 +27,14 @@ RUN apt update && \
     apt clean && \
     rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
-RUN apt update && \
-    apt install -y --no-install-recommends --no-install-suggests \
-        wget ocl-icd-libopencl1 && \
-    apt autoremove -y && \
-    apt clean && \
-    rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/* && \
 # https://github.com/intel/compute-runtime/releases
-    mkdir /tmp/intel-compute-runtime && \
+RUN mkdir /tmp/intel-compute-runtime && \
     cd /tmp/intel-compute-runtime && \
     curl -sX GET "https://api.github.com/repos/intel/compute-runtime/releases/tags/$(curl -sX GET "https://api.github.com/repos/intel/compute-runtime/releases/latest" | jq -r '.tag_name')" | jq -r '.body' | grep wget | grep -v .sum | grep -v .ddeb | sed 's|wget ||g' > list.txt && \
     wget -i list.txt && \
     dpkg -i *.deb && \
     cd .. && \
-    rm -rf /tmp/intel-compute-runtime
+    rm -rf /tmp/*
 
 COPY root/ /
 RUN chmod -R +x /etc/cont-init.d/ /etc/services.d/
