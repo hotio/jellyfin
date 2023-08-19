@@ -6,5 +6,5 @@
   "upstream_tag": "focal",
   "upstream_digest_amd64": "sha256:915756d0646aaf88afb6a46e881fd22ffff90b1e5878ad3eda68def59a0dcb52",
   "upstream_digest_arm64": "sha256:5290c1986b02212749e85f17195ce9837976c6d5c2a602d13961d37ebb5ca071",
-  "test_url": "http://localhost:8096"
+  "test_url": "http://localhost:8096/web/#/wizardstart.html"
 }
