@@ -17,8 +17,3 @@ for i in ${DEVICES}; do
     # If the user hotio isn't a member of the group, add him
     getent group "${DEVICE_GROUP_NAME}" | grep -q hotio || usermod -a -G "${DEVICE_GROUP_NAME}" hotio
 done
-
-if [[ -d "/opt/vc/lib" ]] && [[ ! -f "/etc/ld.so.conf.d/00-vmcs.conf" ]]; then
-    echo "/opt/vc/lib" > "/etc/ld.so.conf.d/00-vmcs.conf"
-	ldconfig
-fi
