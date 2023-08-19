@@ -30,13 +30,13 @@ RUN apt update && \
         wget ocl-icd-libopencl1 && \
     apt autoremove -y && \
     apt clean && \
-    rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/* \
+    rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/* && \
 # https://github.com/intel/compute-runtime/releases
     mkdir /tmp/intel-compute-runtime && \
     cd /tmp/intel-compute-runtime && \
     RUNTIME_URLS=$(curl -sX GET "https://api.github.com/repos/intel/compute-runtime/releases/tags/$(curl -sX GET "https://api.github.com/repos/intel/compute-runtime/releases/latest" | jq -r '.tag_name')" | jq -r '.body' | grep wget | grep -v .sum | grep -v .ddeb | sed 's|wget ||g') && \
-    for url in $RUNTIME_URLS; do \
-        curl -o /tmp/intel-compute-runtime/$(basename "${url%$'\r'}") -L "${url%$'\r'}"; \
+    for url in ${RUNTIME_URLS}; do \
+        wget "${url%$'\r'}"; \
     done \
     dpkg -i *.deb && \
     cd .. && \
