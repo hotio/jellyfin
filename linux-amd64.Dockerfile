@@ -7,32 +7,6 @@ ARG DEBIAN_FRONTEND="noninteractive"
 
 VOLUME ["${CONFIG_DIR}"]
 
-# install packages
-RUN apt update && \
-    apt install -y --no-install-recommends --no-install-suggests \
-        nvidia-opencl-icd-340 \
-        i965-va-driver \
-        mesa-va-drivers && \
-# clean up
-    apt autoremove -y && \
-    apt clean && \
-    rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
-
-# install intel-media-va-driver-non-free
-RUN apt update && \
-    apt install -y --no-install-recommends --no-install-suggests \
-        gnupg && \
-    curl -fsSL "https://repositories.intel.com/graphics/intel-graphics.key" | apt-key add - && \
-    echo "deb [arch=amd64] https://repositories.intel.com/graphics/ubuntu focal main" | tee /etc/apt/sources.list.d/intel.list && \
-    apt update && \
-    apt install -y --no-install-recommends --no-install-suggests \
-        intel-media-va-driver-non-free && \
-# clean up
-    apt purge -y gnupg && \
-    apt autoremove -y && \
-    apt clean && \
-    rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
-
 # install jellyfin
 ARG VERSION
 RUN apt update && \
@@ -43,6 +17,8 @@ RUN apt update && \
     echo "deb [arch=amd64] https://repo.jellyfin.org/ubuntu focal unstable" | tee -a /etc/apt/sources.list.d/jellyfin.list && \
     apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
+        wget \
+        ocl-icd-libopencl1 \
         jellyfin-server=${VERSION}-unstable \
         jellyfin-web \
         jellyfin-ffmpeg5 && \
@@ -51,6 +27,16 @@ RUN apt update && \
     apt autoremove -y && \
     apt clean && \
     rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
+
+# https://github.com/intel/compute-runtime/releases
+ARG INTEL_CR_VERSION
+RUN mkdir /tmp/intel-compute-runtime && \
+    cd /tmp/intel-compute-runtime && \
+    curl -fsSL "https://api.github.com/repos/intel/compute-runtime/releases/tags/${INTEL_CR_VERSION}" | jq -r '.body' | grep wget | grep -v .sum | grep -v .ddeb | sed 's|wget ||g' > list.txt && \
+    wget -i list.txt && \
+    dpkg -i *.deb && \
+    cd .. && \
+    rm -rf /tmp/*
 
 COPY root/ /
 RUN chmod -R +x /etc/cont-init.d/ /etc/services.d/
