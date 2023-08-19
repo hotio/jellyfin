@@ -9,7 +9,7 @@ VOLUME ["${CONFIG_DIR}"]
 
 RUN apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
-        wget && \
+        wget ocl-icd-libopencl1 && \
     apt autoremove -y && \
     apt clean && \
     rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
