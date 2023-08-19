@@ -2,7 +2,7 @@
 
 version=$(curl -fsSL "https://repo.jellyfin.org/releases/server/ubuntu/stable/server/" | grep -o ">jellyfin-server_.*_arm64.deb<" | sed -e 's/>jellyfin-server_//g' -e 's/_arm64.deb<//g' | sort -r | head -1)
 [[ -z ${version} ]] && exit 0
-intel_cr_version=$(curl -fsSL "https://api.github.com/repos/intel/compute-runtime/releases/latest" | jq -r '.tag_name')
+intel_cr_version=$(curl -u "${GITHUB_ACTOR}:${GITHUB_TOKEN}" -fsSL "https://api.github.com/repos/intel/compute-runtime/releases/latest" | jq -r '.tag_name')
 [[ -z ${intel_cr_version} ]] && exit 0
 version_json=$(cat ./VERSION.json)
 jq '.version = "'"${version}"'"' <<< "${version_json}" > VERSION.json
