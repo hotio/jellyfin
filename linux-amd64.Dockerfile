@@ -7,32 +7,22 @@ ARG DEBIAN_FRONTEND="noninteractive"
 
 VOLUME ["${CONFIG_DIR}"]
 
-# install packages
-RUN apt update && \
-    apt install -y --no-install-recommends --no-install-suggests \
-        nvidia-opencl-icd-340 \
-        intel-opencl-icd \
-        i965-va-driver \
-        mesa-va-drivers && \
-# clean up
-    apt autoremove -y && \
-    apt clean && \
-    rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
+# https://github.com/intel/compute-runtime/releases
+ARG GMMLIB_VERSION=22.0.2
+ARG IGC_VERSION=1.0.10395
+ARG NEO_VERSION=22.08.22549
+ARG LEVEL_ZERO_VERSION=1.3.22549
 
-# install intel-media-va-driver-non-free
-RUN apt update && \
-    apt install -y --no-install-recommends --no-install-suggests \
-        gnupg && \
-    curl -fsSL "https://repositories.intel.com/graphics/intel-graphics.key" | apt-key add - && \
-    echo "deb [arch=amd64] https://repositories.intel.com/graphics/ubuntu focal main" | tee /etc/apt/sources.list.d/intel.list && \
-    apt update && \
-    apt install -y --no-install-recommends --no-install-suggests \
-        intel-media-va-driver-non-free && \
-# clean up
-    apt purge -y gnupg && \
-    apt autoremove -y && \
-    apt clean && \
-    rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
+RUN mkdir /tmp/intel-compute-runtime && \
+    cd /tmp/intel-compute-runtime && \
+    wget "https://github.com/intel/compute-runtime/releases/download/${NEO_VERSION}/intel-gmmlib_${GMMLIB_VERSION}_amd64.deb" && \
+    wget "https://github.com/intel/intel-graphics-compiler/releases/download/igc-${IGC_VERSION}/intel-igc-core_${IGC_VERSION}_amd64.deb" && \
+    wget "https://github.com/intel/intel-graphics-compiler/releases/download/igc-${IGC_VERSION}/intel-igc-opencl_${IGC_VERSION}_amd64.deb" && \
+    wget "https://github.com/intel/compute-runtime/releases/download/${NEO_VERSION}/intel-opencl-icd_${NEO_VERSION}_amd64.deb "&& \
+    wget "https://github.com/intel/compute-runtime/releases/download/${NEO_VERSION}/intel-level-zero-gpu_${LEVEL_ZERO_VERSION}_amd64.deb" && \
+    dpkg -i *.deb && \
+    cd .. && \
+    rm -rf /tmp/intel-compute-runtime
 
 # install jellyfin
 ARG VERSION
