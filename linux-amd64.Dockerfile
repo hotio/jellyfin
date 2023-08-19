@@ -28,9 +28,10 @@ RUN apt update && \
     rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
 # https://github.com/intel/compute-runtime/releases
+ARG INTEL_CR_VERSION
 RUN mkdir /tmp/intel-compute-runtime && \
     cd /tmp/intel-compute-runtime && \
-    curl -sX GET "https://api.github.com/repos/intel/compute-runtime/releases/tags/$(curl -sX GET "https://api.github.com/repos/intel/compute-runtime/releases/latest" | jq -r '.tag_name')" | jq -r '.body' | grep wget | grep -v .sum | grep -v .ddeb | sed 's|wget ||g' > list.txt && \
+    curl -fsSL "https://api.github.com/repos/intel/compute-runtime/releases/tags/${INTEL_CR_VERSION}" | jq -r '.body' | grep wget | grep -v .sum | grep -v .ddeb | sed 's|wget ||g' > list.txt && \
     wget -i list.txt && \
     dpkg -i *.deb && \
     cd .. && \
