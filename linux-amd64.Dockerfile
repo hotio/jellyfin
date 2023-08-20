@@ -17,7 +17,6 @@ RUN apt update && \
     echo "deb [arch=amd64] https://repo.jellyfin.org/ubuntu focal unstable" | tee -a /etc/apt/sources.list.d/jellyfin.list && \
     apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
-        wget \
         ocl-icd-libopencl1 \
         jellyfin-server=${VERSION}-unstable \
         jellyfin-web \
