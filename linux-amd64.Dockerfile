@@ -37,4 +37,3 @@ RUN mkdir /tmp/intel-compute-runtime && \
     rm -rf /tmp/*
 
 COPY root/ /
-RUN chmod -R +x /etc/cont-init.d/ /etc/services.d/
