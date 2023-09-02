@@ -13,8 +13,8 @@ RUN apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
         gnupg && \
     curl -fsSL "https://repo.jellyfin.org/ubuntu/jellyfin_team.gpg.key" | apt-key add - && \
-    echo "deb [arch=amd64] https://repo.jellyfin.org/ubuntu focal main" | tee /etc/apt/sources.list.d/jellyfin.list && \
-    echo "deb [arch=amd64] https://repo.jellyfin.org/ubuntu focal unstable" | tee -a /etc/apt/sources.list.d/jellyfin.list && \
+    echo "deb [arch=amd64] https://repo.jellyfin.org/ubuntu jammy main" | tee /etc/apt/sources.list.d/jellyfin.list && \
+    echo "deb [arch=amd64] https://repo.jellyfin.org/ubuntu jammy unstable" | tee -a /etc/apt/sources.list.d/jellyfin.list && \
     apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
         ocl-icd-libopencl1 \
