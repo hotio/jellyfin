@@ -6,4 +6,5 @@ intel_cr_version=$(curl -u "${GITHUB_ACTOR}:${GITHUB_TOKEN}" -fsSL "https://api.
 [[ -z ${intel_cr_version} ]] && exit 0
 version_json=$(cat ./VERSION.json)
 jq '.version = "'"${version}"'"' <<< "${version_json}" > VERSION.json
+version_json=$(cat ./VERSION.json)
 jq '.intel_cr_version = "'"${intel_cr_version}"'"' <<< "${version_json}" > VERSION.json
