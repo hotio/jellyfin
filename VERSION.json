@@ -1,6 +1,6 @@
 {
   "description": "Unstable",
-  "version": "20231101.5",
+  "version": "20231101.6",
   "intel_cr_version": "23.30.26918.9",
   "upstream_image": "ghcr.io/hotio/base",
   "upstream_tag": "jammy",
