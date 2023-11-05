@@ -1,7 +1,7 @@
 {
   "latest": true,
   "description": "Stable",
-  "version": "10.8.11-1",
+  "version": "10.8.12-1",
   "intel_cr_version": "23.30.26918.9",
   "upstream_image": "ghcr.io/hotio/base",
   "upstream_tag": "jammy",
