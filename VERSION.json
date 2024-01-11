@@ -1,7 +1,7 @@
 {
   "description": "Unstable",
   "version": "20231115.15",
-  "intel_cr_version": "23.35.27191.9",
+  "intel_cr_version": "23.39.27427.23",
   "upstream_image": "ghcr.io/hotio/base",
   "upstream_tag": "jammy",
   "upstream_digest_amd64": "sha256:2f8b60411597a7e71e8b9ce37fe59709d60b43c2adf70b40f54ffd7fe4cf4fd7",
