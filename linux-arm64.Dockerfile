@@ -5,8 +5,6 @@ FROM ${UPSTREAM_IMAGE}@${UPSTREAM_DIGEST_ARM64}
 EXPOSE 8096
 ARG DEBIAN_FRONTEND="noninteractive"
 
-VOLUME ["${CONFIG_DIR}"]
-
 # install jellyfin
 ARG VERSION
 RUN apt update && \
