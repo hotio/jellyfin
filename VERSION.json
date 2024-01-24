@@ -3,7 +3,7 @@
   "version": "20231115.15",
   "intel_cr_version": "23.48.27912.11",
   "upstream_image": "ghcr.io/hotio/base",
-  "upstream_tag": "jammy",
-  "upstream_digest_amd64": "sha256:45ea2f5207ddca9bb1c542cd0d3146e9156bc40a51453aab14485642bb86cc80",
-  "upstream_digest_arm64": "sha256:17a2d7eecb74dbeca9eba0b9faba13a040142ca53cbcc93264d2829855bba352"
+  "upstream_tag": "jammyvpn",
+  "upstream_digest_amd64": "sha256:740397c49f7ff298ff3460a34bf1f87f42aca3f7d577cdf9167e01d19fa5f075",
+  "upstream_digest_arm64": "sha256:4d24a370dff37ef9cb0dd0c3401babbc07673b154659dd6a8b407d1952d6007d"
 }
