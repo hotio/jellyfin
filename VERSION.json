@@ -2,7 +2,7 @@
   "latest": true,
   "description": "Stable",
   "version": "10.8.13-1",
-  "intel_cr_version": "23.48.27912.11",
+  "intel_cr_version": "23.52.28202.14",
   "upstream_image": "ghcr.io/hotio/base",
   "upstream_tag": "jammyvpn",
   "upstream_digest_amd64": "sha256:f93cb4f0274d6e9cfc3bcbce2a32e590c4d9ac27543c26c06fe78a8f2fadd1a9",
