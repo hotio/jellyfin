@@ -1,13 +1,13 @@
 {
-  "latest": true,
   "description": "Stable",
-  "version": "10.8.13-1",
   "intel_cr_version": "23.52.28202.14",
-  "upstream_image": "ghcr.io/hotio/base",
-  "upstream_tag": "jammyvpn",
+  "latest": true,
+  "test_amd64": true,
+  "test_arm64": true,
+  "test_url": "http://localhost:8096",
   "upstream_digest_amd64": "sha256:3f11ef5c7ae6dde73b097e216163529c335442e1c74d4f2dced4e5e3303cb9b9",
   "upstream_digest_arm64": "sha256:794e6f17118dbf9d7ac5d5dcf46d49091479865fa1ab91f3b9df6c1f00235c2d",
-  "test_url": "http://localhost:8096",
-  "test_amd64": true,
-  "test_arm64": true
+  "upstream_image": "ghcr.io/hotio/base",
+  "upstream_tag": "jammyvpn",
+  "version": "10.8.13-1"
 }
