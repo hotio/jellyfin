@@ -16,7 +16,7 @@ RUN apt update && \
     echo "deb [arch=arm64] https://repo.jellyfin.org/ubuntu jammy main" | tee /etc/apt/sources.list.d/jellyfin.list && \
     apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
-        jellyfin-server=${VERSION} \
+        jellyfin-server=${VERSION}+ubu2204 \
         jellyfin-web \
         jellyfin-ffmpeg6 && \
 # clean up

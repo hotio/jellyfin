@@ -17,7 +17,7 @@ RUN apt update && \
     apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
         ocl-icd-libopencl1 \
-        jellyfin-server=${VERSION} \
+        jellyfin-server=${VERSION}+ubu2204 \
         jellyfin-web \
         jellyfin-ffmpeg6 && \
 # clean up
