@@ -1,6 +1,6 @@
 {
   "description": "Stable",
-  "intel_cr_version": "24.22.29735.20",
+  "intel_cr_version": "24.26.30049.6",
   "latest": true,
   "test_amd64": true,
   "test_arm64": true,
