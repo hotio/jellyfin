@@ -1,6 +1,6 @@
 {
   "description": "Unstable",
-  "intel_cr_version": "24.45.31740.9",
+  "intel_cr_version": "24.48.31907.7",
   "test_amd64": true,
   "test_arm64": true,
   "test_url": "http://localhost:8096",
