@@ -1,5 +1,5 @@
 #!/bin/bash
-version=$(curl -fsSL "https://repo.jellyfin.org/ubuntu/dists/jammy/main/binary-amd64/Packages" | grep -A 7 -m 1 'Package: jellyfin-server') || exit 1
+version=$(curl -fsSL "https://repo.jellyfin.org/ubuntu/dists/noble/main/binary-amd64/Packages" | grep -A 7 -m 1 'Package: jellyfin-server') || exit 1
 version=$(awk -F ': ' '/Version/{print $2;exit}' <<< "${version}" | sed s/+.*//g)
 intel_cr_version=$(curl -u "${GITHUB_ACTOR}:${GITHUB_TOKEN}" -fsSL "https://api.github.com/repos/intel/compute-runtime/releases/latest" | jq -re '.tag_name') || exit 1
 intel_gc_version=$(curl -u "${GITHUB_ACTOR}:${GITHUB_TOKEN}" -fsSL "https://api.github.com/repos/intel/intel-graphics-compiler/releases/latest" | jq -re '.tag_name') || exit 1
