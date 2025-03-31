@@ -19,7 +19,7 @@ RUN apt update && \
         ocl-icd-libopencl1 \
         jellyfin-server=${VERSION}+ubu2404 \
         jellyfin-web \
-        jellyfin-ffmpeg6 && \
+        jellyfin-ffmpeg7 && \
 # clean up
     apt purge -y gnupg && \
     apt autoremove -y && \
