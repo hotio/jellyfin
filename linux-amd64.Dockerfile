@@ -32,8 +32,11 @@ ARG INTEL_CR_VERSION
 ARG INTEL_GC_VERSION
 RUN mkdir /tmp/intel-compute-runtime && \
     cd /tmp/intel-compute-runtime && \
-    curl -fsSL "https://api.github.com/repos/intel/compute-runtime/releases/tags/${INTEL_CR_VERSION}" | jq -r '.assets[].browser_download_url' | grep -v .sum | grep -v .ddeb > list.txt && \
+    curl -fsSL "https://api.github.com/repos/intel/compute-runtime/releases/tags/${INTEL_CR_VERSION}" | jq -r '.assets[].browser_download_url' | grep -v .sum | grep -v .ddeb | grep -v zero > list.txt && \
     curl -fsSL "https://api.github.com/repos/intel/intel-graphics-compiler/releases/tags/v${INTEL_GC_VERSION}" | jq -r '.assets[].browser_download_url' | grep -v devel >> list.txt && \
+    echo "https://github.com/intel/compute-runtime/releases/download/24.35.30872.22/intel-opencl-icd-legacy1_24.35.30872.22_amd64.deb" >> list.txt && \
+    echo "https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.17537.20/intel-igc-core_1.0.17537.20_amd64.deb" >> list.txt && \
+    echo "https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.17537.20/intel-igc-opencl_1.0.17537.20_amd64.deb" >> list.txt && \
     wget -i list.txt && \
     dpkg -i *.deb && \
     cd .. && \
