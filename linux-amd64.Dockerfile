@@ -28,9 +28,11 @@ RUN apt update && \
 
 # https://github.com/intel/compute-runtime/releases
 ARG INTEL_CR_VERSION
+ARG INTEL_GC_VERSION
 RUN mkdir /tmp/intel-compute-runtime && \
     cd /tmp/intel-compute-runtime && \
-    curl -fsSL "https://api.github.com/repos/intel/compute-runtime/releases/tags/${INTEL_CR_VERSION}" | jq -r '.body' | grep wget | grep -v .sum | grep -v .ddeb | sed 's|wget ||g' > list.txt && \
+    curl -fsSL "https://api.github.com/repos/intel/compute-runtime/releases/tags/${INTEL_CR_VERSION}" | jq -r '.assets[].browser_download_url' | grep -v .sum | grep -v .ddeb > list.txt && \
+    curl -fsSL "https://api.github.com/repos/intel/intel-graphics-compiler/releases/tags/v${INTEL_GC_VERSION}" | jq -r '.assets[].browser_download_url' | grep -v devel >> list.txt && \
     wget -i list.txt && \
     dpkg -i *.deb && \
     cd .. && \
