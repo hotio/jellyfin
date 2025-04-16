@@ -35,6 +35,7 @@ RUN mkdir /tmp/intel-compute-runtime && \
     cd /tmp/intel-compute-runtime && \
     curl -fsSL "https://api.github.com/repos/intel/compute-runtime/releases/tags/${INTEL_CR_VERSION}" | jq -r '.assets[].browser_download_url' | grep -e "libigdgmm.*\.deb" >> list.txt && \
     curl -fsSL "https://api.github.com/repos/intel/compute-runtime/releases/tags/${INTEL_CR_VERSION}" | jq -r '.assets[].browser_download_url' | grep -e "intel-opencl-icd.*\.deb" >> list.txt && \
+    INTEL_GC_VERSION=2.8.3 && \
     curl -fsSL "https://api.github.com/repos/intel/intel-graphics-compiler/releases/tags/v${INTEL_GC_VERSION}" | jq -r '.assets[].browser_download_url' | grep -e "intel-igc-core-2.*\.deb" >> list.txt && \
     curl -fsSL "https://api.github.com/repos/intel/intel-graphics-compiler/releases/tags/v${INTEL_GC_VERSION}" | jq -r '.assets[].browser_download_url' | grep -e "intel-igc-opencl-2.*\.deb" >> list.txt && \
     echo "https://github.com/intel/compute-runtime/releases/download/24.35.30872.22/intel-opencl-icd-legacy1_24.35.30872.22_amd64.deb" >> list.txt && \
