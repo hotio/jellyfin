@@ -1,7 +1,7 @@
 {
   "description": "Stable",
   "intel_cr_version": "25.09.32961.7",
-  "intel_gc_version": "2.8.3",
+  "intel_gc_version": "2.10.8",
   "latest": true,
   "test_amd64": true,
   "test_arm64": true,
