@@ -9,4 +9,7 @@ umask "${UMASK}"
 [[ -z ${JELLYFIN_CACHE_DIR} ]]   && JELLYFIN_CACHE_DIR="${CONFIG_DIR}/cache"    && export JELLYFIN_CACHE_DIR
 [[ -z ${JELLYFIN_WEB_DIR} ]]     && JELLYFIN_WEB_DIR="/usr/share/jellyfin/web"  && export JELLYFIN_WEB_DIR
 
+HOME="${CONFIG_DIR}"         && export HOME
+TMPDIR="${CONFIG_DIR}/.temp" && export TMPDIR && rm -rf "${TMPDIR}" && mkdir -p "${TMPDIR}/jellyfin" && find "${TMPDIR}" \( ! -user hotio -or ! -group hotio \) -exec chown hotio:hotio {} +
+
 exec s6-setuidgid hotio "/usr/bin/jellyfin" --ffmpeg="/usr/lib/jellyfin-ffmpeg/ffmpeg"
