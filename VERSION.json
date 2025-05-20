@@ -1,6 +1,6 @@
 {
   "description": "Unstable",
-  "intel_cr_version": "25.13.33276.16",
+  "intel_cr_version": "25.18.33578.6",
   "intel_gc_version": "2.11.7",
   "test_amd64": true,
   "test_arm64": true,
