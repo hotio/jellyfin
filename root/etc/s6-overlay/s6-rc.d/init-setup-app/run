@@ -27,3 +27,5 @@ for i in ${DEVICES}; do
     # If the user hotio isn't a member of the group, add him
     getent group "${DEVICE_GROUP_NAME}" | grep -q hotio || usermod -a -G "${DEVICE_GROUP_NAME}" hotio
 done
+
+find "/usr/share/jellyfin" \( ! -user hotio -or ! -group hotio \) -exec chown hotio:hotio {} +
