@@ -4,7 +4,7 @@ ARG UPSTREAM_DIGEST_AMD64
 FROM ${UPSTREAM_IMAGE}@${UPSTREAM_DIGEST_AMD64}
 EXPOSE 8096
 ARG IMAGE_STATS
-ENV IMAGE_STATS=${IMAGE_STATS} WEBUI_PORTS="8096/tcp,8096/udp" MALLOC_TRIM_THRESHOLD_=131072 LD_PRELOAD="/usr/lib/jellyfin/libjemalloc.so.2"
+ENV IMAGE_STATS=${IMAGE_STATS} WEBUI_PORTS="8096/tcp,8096/udp" MALLOC_TRIM_THRESHOLD_=131072
 
 ARG DEBIAN_FRONTEND="noninteractive"
 # install jellyfin
@@ -28,6 +28,8 @@ RUN apt update && \
     apt autoremove -y && \
     apt clean && \
     rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
+
+ENV LD_PRELOAD="/usr/lib/jellyfin/libjemalloc.so.2"
 
 # https://github.com/intel/compute-runtime/releases
 ARG INTEL_CR_VERSION
