@@ -3,7 +3,7 @@
   "intel_cr_version": "25.35.35096.9",
   "latest": true,
   "test_amd64": true,
-  "test_arm64": true,
+  "test_arm64": false,
   "test_url": "http://localhost:8096",
   "upstream_digest_amd64": "sha256:b0d985fe1bf5d6c7ffa98ae069b2a9b0baa2895f3b0a0972228c418dbee3b786",
   "upstream_digest_arm64": "sha256:4bcae3d8feea7c739930e6dfa0e6cd1c3a5d2aea135c3979f2fc8f90098c74d4",
