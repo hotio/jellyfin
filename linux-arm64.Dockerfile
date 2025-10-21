@@ -4,7 +4,7 @@ ARG UPSTREAM_DIGEST_ARM64
 FROM ${UPSTREAM_IMAGE}@${UPSTREAM_DIGEST_ARM64}
 EXPOSE 8096
 ARG IMAGE_STATS
-ENV IMAGE_STATS=${IMAGE_STATS} WEBUI_PORTS="8096/tcp,8096/udp" MALLOC_TRIM_THRESHOLD_=131072
+ENV IMAGE_STATS=${IMAGE_STATS} WEBUI_PORTS="8096/tcp,8096/udp" MALLOC_TRIM_THRESHOLD_=131072 LD_PRELOAD="/usr/lib/jellyfin/libjemalloc.so.2"
 
 ARG DEBIAN_FRONTEND="noninteractive"
 # install jellyfin
@@ -15,6 +15,9 @@ RUN apt update && \
     curl -fsSL "https://repo.jellyfin.org/ubuntu/jellyfin_team.gpg.key" | apt-key add - && \
     echo "deb [arch=arm64] https://repo.jellyfin.org/ubuntu noble main" | tee /etc/apt/sources.list.d/jellyfin.list && \
     apt update && \
+    apt install -y --no-install-recommends --no-install-suggests \
+        libjemalloc2 && \
+    mkdir -p /usr/lib/jellyfin && ln -s /usr/lib/aarch64-linux-gnu/libjemalloc.so.2 /usr/lib/jellyfin/libjemalloc.so.2 && \
     apt install -y --no-install-recommends --no-install-suggests \
         jellyfin-server=${VERSION}+ubu2404 \
         jellyfin-web \
