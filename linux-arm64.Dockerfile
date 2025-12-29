@@ -32,3 +32,4 @@ RUN apt update && \
 ENV LD_PRELOAD="/usr/lib/jellyfin/libjemalloc.so.2"
 
 COPY root/ /
+RUN find /etc/s6-overlay/s6-rc.d -name "run*" -execdir chmod +x {} +

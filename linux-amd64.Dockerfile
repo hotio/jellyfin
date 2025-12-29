@@ -48,3 +48,4 @@ RUN mkdir /tmp/intel-compute-runtime && \
     rm -rf /tmp/*
 
 COPY root/ /
+RUN find /etc/s6-overlay/s6-rc.d -name "run*" -execdir chmod +x {} +
