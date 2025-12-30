@@ -14,13 +14,13 @@
   "release": {
     "description": "Stable",
     "hide": false,
-    "last_updated": "2025-12-29T23:26:03.000Z",
-    "last_updated_url": "https://github.com/hotio/jellyfin/actions/runs/20584719490",
+    "last_updated": "2025-12-30T00:14:07.000Z",
+    "last_updated_url": "https://github.com/hotio/jellyfin/actions/runs/20585399603",
     "latest": true,
     "tags": [
       "release",
       "release-10.11.5",
-      "release-da800d0"
+      "release-9611849"
     ]
   }
 }
