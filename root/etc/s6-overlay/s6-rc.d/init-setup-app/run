@@ -16,4 +16,5 @@ WEBUI_PORTS=${WEBUI_PORTS}
 ----------------------------------------------------------------------
 "
 
+log_inf "Taking ownership of [/usr/share/jellyfin/*]."
 find "/usr/share/jellyfin" \( ! -user hotio -or ! -group hotio \) -exec chown hotio:hotio {} +
