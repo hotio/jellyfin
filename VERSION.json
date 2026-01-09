@@ -2,7 +2,7 @@
   "description": "Unstable",
   "intel_cr_version": "25.48.36300.8",
   "test_amd64": true,
-  "test_arm64": false,
+  "test_arm64": true,
   "test_url": "http://localhost:8096",
   "upstream_digest_amd64": "sha256:e18899a7080f55980b0c4e6b277c41cd0e37c819aa57ed83d4dfc00993cafaa0",
   "upstream_digest_arm64": "sha256:1c9de84ec193019fe768644599f0de40f21e1a0c17a1c037962b1520c0f640af",
