@@ -33,12 +33,12 @@ RUN apt update && \
 ENV LD_PRELOAD="/usr/lib/jellyfin/libjemalloc.so.2"
 
 # https://github.com/intel/compute-runtime/releases
-ARG INTEL_CR_VERSION
+ARG VERSION_INTEL_CR
 RUN mkdir /tmp/intel-compute-runtime && \
     cd /tmp/intel-compute-runtime && \
-    curl -fsSL "https://api.github.com/repos/intel/compute-runtime/releases/tags/${INTEL_CR_VERSION}" | jq -r '.assets[].browser_download_url' | grep -e "libigdgmm.*\.deb" >> list.txt && \
-    curl -fsSL "https://api.github.com/repos/intel/compute-runtime/releases/tags/${INTEL_CR_VERSION}" | jq -r '.assets[].browser_download_url' | grep -e "intel-opencl-icd.*\.deb" >> list.txt && \
-    curl -fsSL "https://api.github.com/repos/intel/compute-runtime/releases/tags/${INTEL_CR_VERSION}" | jq -r '.body' | grep "wget" | grep "intel-graphics-compiler" | sed 's|wget ||g' >> list.txt && \
+    curl -fsSL "https://api.github.com/repos/intel/compute-runtime/releases/tags/${VERSION_INTEL_CR}" | jq -r '.assets[].browser_download_url' | grep -e "libigdgmm.*\.deb" >> list.txt && \
+    curl -fsSL "https://api.github.com/repos/intel/compute-runtime/releases/tags/${VERSION_INTEL_CR}" | jq -r '.assets[].browser_download_url' | grep -e "intel-opencl-icd.*\.deb" >> list.txt && \
+    curl -fsSL "https://api.github.com/repos/intel/compute-runtime/releases/tags/${VERSION_INTEL_CR}" | jq -r '.body' | grep "wget" | grep "intel-graphics-compiler" | sed 's|wget ||g' >> list.txt && \
     echo "https://github.com/intel/compute-runtime/releases/download/24.35.30872.22/intel-opencl-icd-legacy1_24.35.30872.22_amd64.deb" >> list.txt && \
     echo "https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.17537.20/intel-igc-core_1.0.17537.20_amd64.deb" >> list.txt && \
     echo "https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.17537.20/intel-igc-opencl_1.0.17537.20_amd64.deb" >> list.txt && \
