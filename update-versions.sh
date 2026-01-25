@@ -3,7 +3,7 @@ set -exuo pipefail
 
 version=$(curl -fsSL "https://repo.jellyfin.org/ubuntu/dists/noble/main/binary-amd64/Packages" | grep -A 7 -m 1 'Package: jellyfin-server')
 version=$(awk -F ': ' '/Version/{print $2;exit}' <<< "${version}" | sed s/+.*//g)
-version_intel_cr=$(curl -fsSL "https://api.github.com/repos/intel/compute-runtime/releases/latest" | jq -re '.tag_name')
+version_intel_cr=$(curl -fsSL --header "Authorization: Bearer ${GITHUB_TOKEN}" "https://api.github.com/repos/intel/compute-runtime/releases/latest" | jq -re '.tag_name')
 json=$(cat meta.json)
 jq --sort-keys \
     --arg version "${version//v/}" \
