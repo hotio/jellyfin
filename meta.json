@@ -1,6 +1,5 @@
 {
   "description": "Unstable",
-  "packages_hash": "6bf192f6b455d62ff27e0603ddc3b94a1b8d8305",
   "test_amd64": true,
   "test_arm64": true,
   "test_url": "http://localhost:8096",
