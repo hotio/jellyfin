@@ -5,7 +5,7 @@
   "test_url": "http://localhost:8096",
   "upstream_image": "ghcr.io/hotio/base",
   "upstream_tag": "noblevpn",
-  "upstream_tag_sha": "noblevpn-dd6a23e",
+  "upstream_tag_sha": "noblevpn-d1d1c1c",
   "version": "2026051516",
   "version_intel_cr": "26.18.38308.1"
 }
