@@ -23,8 +23,8 @@ RUN apt update && \
     mkdir -p /usr/lib/jellyfin && ln -s /usr/lib/aarch64-linux-gnu/libjemalloc.so.2 /usr/lib/jellyfin/libjemalloc.so.2 && \
     apt install -y --no-install-recommends --no-install-suggests \
         jellyfin-server=${VERSION}+ubu2404 \
-        jellyfin-web \
-        jellyfin-ffmpeg7 && \
+        jellyfin-web=${VERSION}+ubu2404 \
+        jellyfin-ffmpeg8 && \
 # clean up
     apt purge -y gnupg && \
     apt autoremove -y && \
