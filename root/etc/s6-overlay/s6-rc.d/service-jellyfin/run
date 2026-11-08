@@ -10,7 +10,7 @@ umask "${UMASK}"
 [[ -z ${JELLYFIN_WEB_DIR} ]]     && JELLYFIN_WEB_DIR="/usr/share/jellyfin/web"  && export JELLYFIN_WEB_DIR
 
 HOME="${CONFIG_DIR}"         && export HOME
-TMPDIR="${CONFIG_DIR}/.temp" && export TMPDIR && rm -rf "${TMPDIR}" && mkdir -p "${TMPDIR}/jellyfin" && find "${TMPDIR}" \\( ! -user hotio -or ! -group hotio \\) -exec chown hotio:hotio {} +
+TMPDIR="${CONFIG_DIR}/.temp" && export TMPDIR && rm -rf "${TMPDIR}" && mkdir -p "${TMPDIR}/jellyfin" && find "${TMPDIR}" \( ! -user hotio -or ! -group hotio \) -exec chown hotio:hotio {} +
 
 JELLYFIN_UID="$(id -u hotio)"
 JELLYFIN_GID="$(id -g hotio)"
