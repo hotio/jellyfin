@@ -34,4 +34,8 @@ SUPPLEMENTARY_GROUPS="$(
     '
 )"
 
-exec s6-applyuidgid -u "${JELLYFIN_UID}" -g "${JELLYFIN_GID}" -G "${SUPPLEMENTARY_GROUPS}" "/usr/bin/jellyfin" --ffmpeg="/usr/lib/jellyfin-ffmpeg/ffmpeg"
+if [[ -n ${SUPPLEMENTARY_GROUPS} ]]; then
+    exec s6-applyuidgid -u "${JELLYFIN_UID}" -g "${JELLYFIN_GID}" -G "${SUPPLEMENTARY_GROUPS}" "/usr/bin/jellyfin" --ffmpeg="/usr/lib/jellyfin-ffmpeg/ffmpeg"
+fi
+
+exec s6-applyuidgid -u "${JELLYFIN_UID}" -g "${JELLYFIN_GID}" "/usr/bin/jellyfin" --ffmpeg="/usr/lib/jellyfin-ffmpeg/ffmpeg"
